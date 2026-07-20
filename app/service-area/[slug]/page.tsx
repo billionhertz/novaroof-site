@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound, permanentRedirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { BreadcrumbJsonLd, ServiceJsonLd, FAQJsonLd } from "@/components/seo/json-ld";
 import { COMPANY } from "@/lib/data/company";
-import { cities, getCityBySlug, getServiceAreaCitySlugs } from "@/lib/cities-data";
+import {
+  getCityBySlug,
+  getServiceAreaCitySlugs,
+  getServiceAreaCities,
+  isServiceAreaCity,
+} from "@/lib/cities-data";
 import { getCityContent } from "@/lib/cities-content";
 import { services } from "@/lib/data/services";
 import { roofSystems } from "@/lib/roof-systems-data";
@@ -85,6 +90,11 @@ function generateCityFaqs(cityName: string) {
 
 export default async function CityPage({ params }: PageProps) {
   const { slug } = await params;
+
+  if (!isServiceAreaCity(slug)) {
+    permanentRedirect("/service-area");
+  }
+
   const city = getCityBySlug(slug);
 
   if (!city) {
@@ -92,8 +102,8 @@ export default async function CityPage({ params }: PageProps) {
   }
 
   const content = getCityContent(slug);
-  
-  const nearbyCities = cities
+
+  const nearbyCities = getServiceAreaCities()
     .filter(
       (c) =>
         c.slug !== slug &&

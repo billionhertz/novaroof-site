@@ -5,7 +5,7 @@ import { CTASection } from "@/components/sections/cta-section";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { LocalBusinessJsonLd } from "@/components/seo/json-ld";
 import { COMPANY } from "@/lib/data/company";
-import { cities, getCitiesByRegion } from "@/lib/cities-data";
+import { getServiceAreaCities } from "@/lib/cities-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Building, Users } from "lucide-react";
 
@@ -22,8 +22,13 @@ export const metadata: Metadata = {
 };
 
 export default function LocationsPage() {
-  const harrisonburgCities = getCitiesByRegion("Harrisonburg");
-  const richmondCities = getCitiesByRegion("Richmond");
+  const serviceAreaCities = getServiceAreaCities();
+  const harrisonburgCities = serviceAreaCities.filter(
+    (city) => city.closerTo === "Harrisonburg"
+  );
+  const richmondCities = serviceAreaCities.filter(
+    (city) => city.closerTo === "Richmond"
+  );
 
   return (
     <>
@@ -48,7 +53,7 @@ export default function LocationsPage() {
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <div className="mt-4 text-3xl font-bold text-foreground">
-                  {cities.length}+
+                  {serviceAreaCities.length}
                 </div>
                 <div className="text-muted-foreground">Cities Served</div>
               </CardContent>
@@ -138,7 +143,7 @@ export default function LocationsPage() {
               All Service Areas (A-Z)
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {cities
+              {[...serviceAreaCities]
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((city) => (
                   <Link

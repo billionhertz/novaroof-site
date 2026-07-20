@@ -89,10 +89,10 @@ const serviceAreas = [
   { name: "Staunton", slug: "staunton" },
   { name: "Charlottesville", slug: "charlottesville" },
   { name: "Waynesboro", slug: "waynesboro" },
-  { name: "Winchester", slug: "winchester" },
-  { name: "Broadway", slug: "broadway" },
+  { name: "Front Royal", slug: "front-royal" },
+  { name: "Lynchburg", slug: "lynchburg" },
   { name: "Bridgewater", slug: "bridgewater" },
-  { name: "Lexington", slug: "lexington" },
+  { name: "Richmond", slug: "richmond" },
 ];
 
 export default function HomePage() {

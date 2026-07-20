@@ -156,6 +156,14 @@ export function getServiceAreaCitySlugs(): string[] {
   return SERVICE_AREA_CITY_SLUGS;
 }
 
+export function isServiceAreaCity(slug: string): boolean {
+  return SERVICE_AREA_CITY_SLUGS.includes(slug);
+}
+
+export function getServiceAreaCities(): City[] {
+  return cities.filter((city) => SERVICE_AREA_CITY_SLUGS.includes(city.slug));
+}
+
 export function getCityBySlug(slug: string): City | undefined {
   return cities.find((city) => city.slug === slug);
 }
