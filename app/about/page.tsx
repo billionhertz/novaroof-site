@@ -47,7 +47,7 @@ const values = [
 
 const stats = [
   { value: "10+", label: "Years in Business" },
-  { value: "115+", label: "Cities Served" },
+  { value: "Statewide", label: "Virginia Coverage" },
   { value: "500+", label: "Projects Completed" },
   { value: "100%", label: "Satisfaction Guaranteed" },
 ];
@@ -76,7 +76,7 @@ export default function AboutPage() {
               </h2>
               <div className="mt-6 space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  NovaRoof was founded by {COMPANY.founder} with a simple mission: to provide Virginia businesses with commercial roofing services they can trust. What started as a local operation in Harrisonburg has grown into a regional leader serving over 115 communities across the Commonwealth.
+                  NovaRoof was founded by {COMPANY.founder} with a simple mission: to provide Virginia businesses with commercial roofing services they can trust. What started as a local operation in Harrisonburg has grown into a regional leader providing commercial roofing across Virginia, with 100+ completed projects throughout the Commonwealth.
                 </p>
                 <p>
                   Our growth is built on a foundation of quality work and customer satisfaction. We&apos;ve earned our reputation by showing up on time, doing the job right, and standing behind our work. Every project, whether a small repair or a complete roof replacement, receives our full attention and expertise.

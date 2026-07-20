@@ -7,7 +7,7 @@ export const generalFaqs: FAQItem[] = [
   {
     question: "What areas does NovaRoof serve?",
     answer:
-      "NovaRoof provides commercial roofing services throughout Virginia, including the Shenandoah Valley, Northern Virginia, Central Virginia, and the greater Richmond area. We service over 115 cities within a 120-mile radius of our Harrisonburg headquarters.",
+      "NovaRoof provides commercial roofing services throughout Virginia, including the Shenandoah Valley, Northern Virginia, Central Virginia, and the greater Richmond area. From our Harrisonburg headquarters, we've completed 100+ projects across the Commonwealth.",
   },
   {
     question: "What types of commercial roofs do you work on?",

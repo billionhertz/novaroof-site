@@ -40,7 +40,7 @@ import {
 const homeFaqs = [
   {
     question: "What areas does Nova Roof serve?",
-    answer: "We serve commercial building owners throughout the Shenandoah Valley including Harrisonburg, Staunton, Charlottesville, Waynesboro, Winchester, and over 115 surrounding towns across Virginia.",
+    answer: "We serve commercial building owners throughout the Shenandoah Valley including Harrisonburg, Staunton, Charlottesville, and Waynesboro, providing commercial roofing across Virginia.",
   },
   {
     question: "What types of commercial roofs do you work on?",

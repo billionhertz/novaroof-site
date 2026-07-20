@@ -11,11 +11,11 @@ import { MapPin, Building, Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Service Areas | Commercial Roofing Throughout Virginia",
-  description: `${COMPANY.name} provides commercial roofing services to 115+ cities across Virginia. Find your location and learn about our services in your area.`,
+  description: `${COMPANY.name} provides commercial roofing across Virginia. Find your location and learn about our services in your area.`,
   alternates: { canonical: `${COMPANY.url}/service-area` },
   openGraph: {
     title: "Service Areas | Commercial Roofing Throughout Virginia",
-    description: `${COMPANY.name} provides commercial roofing services to 115+ cities across Virginia.`,
+    description: `${COMPANY.name} provides commercial roofing across Virginia.`,
     url: `${COMPANY.url}/service-area`,
     images: [{ url: COMPANY.image }],
   },
@@ -36,7 +36,7 @@ export default function LocationsPage() {
 
       <PageHero
         title="Service Areas"
-        description="NovaRoof provides commercial roofing services throughout Virginia. From our Harrisonburg headquarters, we serve over 115 cities across the Commonwealth."
+        description="NovaRoof provides commercial roofing throughout Virginia. From our Harrisonburg headquarters, we've completed 100+ projects across the Commonwealth."
       />
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
