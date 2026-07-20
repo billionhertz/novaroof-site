@@ -135,6 +135,27 @@ export const cities: City[] = [
   { rank: 116, name: "Broadway", population: 3800, milesFromHarrisonburg: 15, milesFromRichmond: 115, closerTo: "Harrisonburg", slug: "broadway" },
 ];
 
+// Curated list of cities with completed projects and unique hand-written
+// content in lib/cities-content.ts. Only these generate /service-area/[slug]
+// pages and appear in the sitemap. All other city URLs permanently redirect
+// to /service-area.
+export const SERVICE_AREA_CITY_SLUGS: string[] = [
+  "richmond",
+  "roanoke",
+  "lynchburg",
+  "harrisonburg",
+  "charlottesville",
+  "fredericksburg",
+  "staunton",
+  "waynesboro",
+  "front-royal",
+  "bridgewater",
+];
+
+export function getServiceAreaCitySlugs(): string[] {
+  return SERVICE_AREA_CITY_SLUGS;
+}
+
 export function getCityBySlug(slug: string): City | undefined {
   return cities.find((city) => city.slug === slug);
 }

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { cities } from "@/lib/cities-data";
+import { SERVICE_AREA_CITY_SLUGS } from "@/lib/cities-data";
 import { services } from "@/lib/services-data";
 import { roofSystems } from "@/lib/roof-systems-data";
 import { blogPosts } from "@/lib/blog-data";
@@ -90,8 +90,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Location pages
-  const locationPages: MetadataRoute.Sitemap = cities.map((city) => ({
-    url: `${baseUrl}/service-area/${city.slug}`,
+  const locationPages: MetadataRoute.Sitemap = SERVICE_AREA_CITY_SLUGS.map((slug) => ({
+    url: `${baseUrl}/service-area/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.6,

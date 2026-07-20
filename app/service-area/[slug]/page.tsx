@@ -4,7 +4,7 @@ import Image from "next/image";
 import { notFound, permanentRedirect } from "next/navigation";
 import { BreadcrumbJsonLd, ServiceJsonLd, FAQJsonLd } from "@/components/seo/json-ld";
 import { COMPANY } from "@/lib/data/company";
-import { cities, getCityBySlug, getAllCitySlugs } from "@/lib/cities-data";
+import { cities, getCityBySlug, getServiceAreaCitySlugs } from "@/lib/cities-data";
 import { getCityContent } from "@/lib/cities-content";
 import { services } from "@/lib/data/services";
 import { roofSystems } from "@/lib/roof-systems-data";
@@ -35,7 +35,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return getAllCitySlugs().map((slug) => ({ slug }));
+  return getServiceAreaCitySlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
