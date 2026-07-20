@@ -7,15 +7,15 @@ import { LocalBusinessJsonLd } from "@/components/seo/json-ld";
 import { COMPANY } from "@/lib/data/company";
 import { cities, getCitiesByRegion } from "@/lib/cities-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Building, CheckCircle } from "lucide-react";
+import { MapPin, Building, Users } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Service Areas | Commercial Roofing Across Virginia",
-  description: `${COMPANY.name} provides commercial roofing services to communities across Virginia where we've completed projects — from the Shenandoah Valley to Richmond. Find your area.`,
+  title: "Service Areas | Commercial Roofing Throughout Virginia",
+  description: `${COMPANY.name} provides commercial roofing services to 115+ cities across Virginia. Find your location and learn about our services in your area.`,
   alternates: { canonical: `${COMPANY.url}/service-area` },
   openGraph: {
-    title: "Service Areas | Commercial Roofing Across Virginia",
-    description: `${COMPANY.name} provides commercial roofing services to communities across Virginia.`,
+    title: "Service Areas | Commercial Roofing Throughout Virginia",
+    description: `${COMPANY.name} provides commercial roofing services to 115+ cities across Virginia.`,
     url: `${COMPANY.url}/service-area`,
     images: [{ url: COMPANY.image }],
   },
@@ -31,7 +31,7 @@ export default function LocationsPage() {
 
       <PageHero
         title="Service Areas"
-        description="NovaRoof provides commercial roofing services across Virginia. These are communities where we've completed commercial roofing projects — from our Harrisonburg headquarters throughout the Shenandoah Valley and beyond."
+        description="NovaRoof provides commercial roofing services throughout Virginia. From our Harrisonburg headquarters, we serve over 115 cities across the Commonwealth."
       />
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -48,7 +48,7 @@ export default function LocationsPage() {
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <div className="mt-4 text-3xl font-bold text-foreground">
-                  {cities.length}
+                  {cities.length}+
                 </div>
                 <div className="text-muted-foreground">Cities Served</div>
               </CardContent>
@@ -59,7 +59,7 @@ export default function LocationsPage() {
                   <Building className="h-6 w-6 text-primary" />
                 </div>
                 <div className="mt-4 text-3xl font-bold text-foreground">
-                  100mi+
+                  120mi
                 </div>
                 <div className="text-muted-foreground">Service Radius</div>
               </CardContent>
@@ -67,12 +67,12 @@ export default function LocationsPage() {
             <Card>
               <CardContent className="p-6 text-center">
                 <div className="flex h-12 w-12 mx-auto items-center justify-center rounded-xl bg-primary/10">
-                  <CheckCircle className="h-6 w-6 text-primary" />
+                  <Users className="h-6 w-6 text-primary" />
                 </div>
                 <div className="mt-4 text-3xl font-bold text-foreground">
-                  Free
+                  2M+
                 </div>
-                <div className="text-muted-foreground">Roof Inspections</div>
+                <div className="text-muted-foreground">Population Served</div>
               </CardContent>
             </Card>
           </div>
@@ -149,6 +149,9 @@ export default function LocationsPage() {
                     <MapPin className="h-4 w-4 text-muted-foreground group-hover:text-primary" />
                     <span className="text-foreground group-hover:text-primary font-medium">
                       {city.name}
+                    </span>
+                    <span className="text-sm text-muted-foreground ml-auto">
+                      {city.milesFromHarrisonburg}mi
                     </span>
                   </Link>
                 ))}

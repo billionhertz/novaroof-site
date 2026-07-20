@@ -49,12 +49,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const content = getCityContent(slug);
 
   return {
-    title: content.metaTitle,
-    description: content.metaDescription,
+    title: `Commercial Roofing ${city.name} VA | Roof Repair & Restoration`,
+    description: `Professional commercial roof repair, maintenance, and restoration services in ${city.name}, Virginia. ${COMPANY.name} serves businesses with TPO, EPDM, metal, and spray foam roofing. Free inspection.`,
     alternates: { canonical: `${COMPANY.url}/service-area/${slug}` },
     openGraph: {
       title: content.headline,
-      description: content.metaDescription,
+      description: `Professional commercial roof repair, maintenance, and restoration services in ${city.name}, Virginia.`,
       url: `${COMPANY.url}/service-area/${slug}`,
       type: "website",
       images: [{ url: COMPANY.image }],
