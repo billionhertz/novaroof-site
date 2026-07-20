@@ -1,6 +1,9 @@
 export const COMPANY = {
   name: "Nova Roof Commercial Solutions",
   shortName: "NovaRoof",
+  description:
+    "Nova Roof Commercial Solutions is a commercial roofing contractor headquartered in Harrisonburg, Virginia, providing roof repair, restoration, maintenance, and replacement for commercial and industrial buildings across the Shenandoah Valley and central Virginia.",
+  businessHours: "Mon-Fri 7:00 AM-6:00 PM, Sat 8:00 AM-2:00 PM",
   url: "https://www.novaroof.com",
   phone: "+15405345020",
   phoneDisplay: "(540) 534-5020",

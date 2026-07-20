@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { BreadcrumbJsonLd, ServiceJsonLd, FAQJsonLd } from "@/components/seo/json-ld";
 import { COMPANY } from "@/lib/data/company";
 import { cities, getCityBySlug, getAllCitySlugs } from "@/lib/cities-data";
@@ -88,7 +88,7 @@ export default async function CityPage({ params }: PageProps) {
   const city = getCityBySlug(slug);
 
   if (!city) {
-    notFound();
+    permanentRedirect("/service-area");
   }
 
   const content = getCityContent(slug);

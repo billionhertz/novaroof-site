@@ -17,10 +17,10 @@ export function LocalBusinessJsonLd({ additionalType, areaServed }: LocalBusines
     email: COMPANY.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: COMPANY.address.street,
-      addressLocality: COMPANY.address.city,
-      addressRegion: COMPANY.address.state,
-      postalCode: COMPANY.address.zip,
+      streetAddress: COMPANY.address.streetAddress,
+      addressLocality: COMPANY.address.addressLocality,
+      addressRegion: COMPANY.address.addressRegion,
+      postalCode: COMPANY.address.postalCode,
       addressCountry: "US",
     },
     geo: {
