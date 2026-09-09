@@ -7,6 +7,10 @@ export interface Project {
   systemDescription: string;
   description: string;
   image: string;
+  /** Slug of the roof system in roof-systems-data.ts this project used. Links the case study to /systems/<systemSlug>. */
+  systemSlug: string;
+  /** Slug of the city in cities-data.ts, set ONLY when a matching /service-area/<citySlug> page exists. Leave undefined for locations without a city page. */
+  citySlug?: string;
   squareFootage?: string;
   completedYear?: string;
   challenge?: string;
@@ -24,6 +28,7 @@ export const projects: Project[] = [
     systemDescription: "Seamless Polyurethane-Modified Acrylic Coating System (20-Year)",
     description: "This large church facility's standing seam metal roof was experiencing widespread leaks at fasteners and seams, along with significant rust development. The congregation needed a cost-effective solution that wouldn't disrupt Sunday services.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lynnhaven-baptist-church-metal-roof-restoration-ZhILPqOPRBfVppG4XcZ1ZYoxkag8MR.jpg",
+    systemSlug: "metal-restoration",
     squareFootage: "32,000 sq ft",
     completedYear: "2024",
     challenge: "The church's metal roof had multiple leak points and advancing rust. The facility is in constant use, requiring a restoration approach that minimized disruption.",
@@ -44,6 +49,8 @@ export const projects: Project[] = [
     systemDescription: "Polyurethane Spray Foam with Acrylic Coating System",
     description: "This commercial truck dealership and service center needed a roofing solution that could handle the demanding industrial environment while improving energy efficiency.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/peterbilt-richmond-va-spray-foam-roof-restoration-Ev7OvUCYw68YFCJC9ArYWUAvgwrrOQ.jpg",
+    systemSlug: "spray-foam",
+    citySlug: "richmond",
     squareFootage: "48,000 sq ft",
     completedYear: "2024",
     challenge: "The existing modified bitumen roof had multiple leak points and poor insulation. The facility's large bay doors and heavy HVAC demands made energy efficiency critical.",
@@ -64,6 +71,7 @@ export const projects: Project[] = [
     systemDescription: "Polyurethane Spray Foam with Acrylic Coating System",
     description: "This insulation contractor's headquarters presented an interesting challenge — they needed a roofing solution that demonstrated the energy efficiency they sell to their own customers.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/kirby-cundiff-insulation-spray-foam-roof-restoration-7H7XgSbvqZxbmzmCJM73F1cSa0hiE0.jpg",
+    systemSlug: "spray-foam",
     squareFootage: "18,000 sq ft",
     completedYear: "2023",
     challenge: "The existing flat roof had ponding water issues and insufficient insulation. As an insulation contractor, the company wanted a roof that showcased energy efficiency.",
@@ -84,6 +92,7 @@ export const projects: Project[] = [
     systemDescription: "Polyurethane Spray Foam with Acrylic Coating System",
     description: "This general contractor's office and warehouse facility needed a comprehensive roof restoration that could be completed quickly to avoid disruption to their operations.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/jwb-contractors-radford-va-spray-foam-roof-restoration-ARHWb99Cxmg3W5VK616dfi3CaZ4BXT.jpg",
+    systemSlug: "spray-foam",
     squareFootage: "22,000 sq ft",
     completedYear: "2023",
     challenge: "Multiple leak points throughout the facility were affecting office operations and stored materials. The company needed a fast solution with minimal disruption.",
@@ -104,6 +113,8 @@ export const projects: Project[] = [
     systemDescription: "60-Mil TPO Overlay Retrofit System (20-Year)",
     description: "This John Deere equipment dealership's large metal roof was leaking at numerous points. Rather than replace the metal, we installed a complete TPO overlay system.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/james-river-equipment-tpo-retrofit-metal-roof-HyiXonvhYgM89zJGLUsAxdZrT60iQd.jpg",
+    systemSlug: "tpo",
+    citySlug: "harrisonburg",
     squareFootage: "42,000 sq ft",
     completedYear: "2024",
     challenge: "The standing seam metal roof had widespread leaks at fasteners and seams. A traditional metal replacement would have been extremely expensive for this large facility.",
@@ -124,6 +135,8 @@ export const projects: Project[] = [
     systemDescription: "25-Year PVC Membrane with R-30 Polyiso Insulation",
     description: "This busy Mexican restaurant needed a roof system that could handle grease exposure from kitchen exhaust. PVC's chemical resistance made it the clear choice.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/los-trancas-restaurant-woodstock-pvc-roof-replacement-lntYk7Tq2fIL7Qncmo9d7TAGbcx8Yo.jpg",
+    systemSlug: "pvc",
+    citySlug: "woodstock",
     squareFootage: "5,500 sq ft",
     completedYear: "2024",
     challenge: "Restaurant roofs face unique challenges from grease and cooking oils. The existing EPDM roof was deteriorating rapidly from chemical exposure.",
@@ -144,6 +157,8 @@ export const projects: Project[] = [
     systemDescription: "Seamless Metal Roof Restoration System (10-Year)",
     description: "This agricultural seed company's metal warehouse roof needed restoration to stop leaks and prevent further rust development.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/augusta-seed-verona-va-metal-roof-restoration-kcFmmNvwfZ6stMiSfIoU9JteXwnfbc.jpg",
+    systemSlug: "metal-restoration",
+    citySlug: "verona",
     squareFootage: "28,000 sq ft",
     completedYear: "2023",
     challenge: "Widespread rust and leaks were threatening stored seed inventory. The company needed a cost-effective solution that could be completed quickly.",
@@ -164,6 +179,8 @@ export const projects: Project[] = [
     systemDescription: "60-Mil TPO Membrane with Polyiso Insulation (20-Year)",
     description: "This neighborhood grocery store's aging built-up roof needed full replacement. TPO provided the durability and energy efficiency the owner was looking for.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/oakley-market-lynchburg-tpo-roof-replacement-STJgqER346qYviiFDoO9uXmSZ7K7am.jpg",
+    systemSlug: "tpo",
+    citySlug: "lynchburg",
     squareFootage: "8,200 sq ft",
     completedYear: "2023",
     challenge: "The existing built-up roof had reached end of life with multiple leak points. The store needed minimal disruption during replacement.",
@@ -184,6 +201,7 @@ export const projects: Project[] = [
     systemDescription: "Seamless Polyurethane-Modified Acrylic Coating System",
     description: "This retail location's metal roof was experiencing widespread rust and multiple leaks. Our restoration system extended the roof's life at a fraction of replacement cost.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/family-dollar-china-grove-metal-roof-restoration-4hBT8qpT0Rq3ybYpzbllAkqM594lIa.jpg",
+    systemSlug: "metal-restoration",
     squareFootage: "8,500 sq ft",
     completedYear: "2023",
     challenge: "The metal roof had significant rust development and leaks at fasteners and seams. Corporate needed a cost-effective solution that wouldn't disrupt store operations.",
@@ -204,6 +222,7 @@ export const projects: Project[] = [
     systemDescription: "Seamless Acrylic Restoration System (10-Year)",
     description: "This electrical contractor's warehouse and office facility needed metal roof restoration to address leaks and improve energy efficiency.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/electric-power-inc-chester-va-metal-roof-restoration-EatWE71ujFGdugiDjxWa2QpVYca0e9.jpg",
+    systemSlug: "metal-restoration",
     squareFootage: "16,000 sq ft",
     completedYear: "2024",
     challenge: "Leaks were affecting stored electrical equipment and office areas. The company needed a quick, effective solution.",
@@ -224,6 +243,8 @@ export const projects: Project[] = [
     systemDescription: "Seamless Acrylic Membrane Restoration System",
     description: "This commercial office building's aging EPDM roof was showing seam failures and UV deterioration. Our restoration system extended its life by 15+ years.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/one-middlebrook-avenue-staunton-epdm-membrane-restoration-ZBL9aoXytgqu5SXISo1xXVfB70oLvn.jpg",
+    systemSlug: "membrane-restoration",
+    citySlug: "staunton",
     squareFootage: "12,000 sq ft",
     completedYear: "2024",
     challenge: "The EPDM membrane had multiple seam failures and was showing signs of UV degradation. Water intrusion was affecting tenant spaces.",
@@ -243,4 +264,12 @@ export function getProjectBySlug(slug: string): Project | undefined {
 
 export function getAllProjectSlugs(): string[] {
   return projects.map((project) => project.slug);
+}
+
+export function getProjectsBySystem(systemSlug: string): Project[] {
+  return projects.filter((project) => project.systemSlug === systemSlug);
+}
+
+export function getProjectsByCity(citySlug: string): Project[] {
+  return projects.filter((project) => project.citySlug === citySlug);
 }

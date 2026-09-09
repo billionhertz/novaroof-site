@@ -108,9 +108,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Project case study pages
   const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.5,
+    // Use the completion year (end of that year) when available so the date is
+    // meaningful, instead of always reporting "now".
+    lastModified: project.completedYear
+      ? new Date(`${project.completedYear}-12-31`)
+      : new Date(),
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
   }));
 
   return [

@@ -3,8 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
+import { generateProjectSchema, SchemaScript } from "@/lib/schema";
 import { COMPANY } from "@/lib/data/company";
 import { projects, getProjectBySlug, getAllProjectSlugs } from "@/lib/projects-data";
+import { getRoofSystemBySlug } from "@/lib/roof-systems-data";
+import { getCityBySlug } from "@/lib/cities-data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +17,7 @@ import {
   MapPin,
   Calendar,
   Ruler,
+  Layers,
 } from "lucide-react";
 
 interface PageProps {
@@ -40,8 +44,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: project.name,
       description: project.description,
       url: `${COMPANY.url}/projects/${slug}`,
-      type: "website",
-      images: [{ url: COMPANY.image }],
+      type: "article",
+      images: [{ url: project.image, alt: `${project.name} – ${project.roofType}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.name,
+      description: project.description,
+      images: [project.image],
     },
   };
 }
@@ -58,8 +68,22 @@ export default async function ProjectPage({ params }: PageProps) {
     .filter((p) => p.slug !== slug && p.category === project.category)
     .slice(0, 3);
 
+  const roofSystem = getRoofSystemBySlug(project.systemSlug);
+  const city = project.citySlug ? getCityBySlug(project.citySlug) : undefined;
+
+  const projectSchema = generateProjectSchema({
+    name: project.name,
+    description: project.description,
+    url: `${COMPANY.url}/projects/${slug}`,
+    location: project.location,
+    image: project.image,
+    roofType: project.roofType,
+    completedYear: project.completedYear,
+  });
+
   return (
     <>
+      <SchemaScript schema={projectSchema} />
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "/" },
@@ -109,6 +133,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   src={project.image}
                   alt={`${project.name} – ${project.roofType}`}
                   fill
+                  sizes="(min-width: 1024px) 66vw, 100vw"
                   className="object-cover"
                   priority
                 />
@@ -230,6 +255,41 @@ export default async function ProjectPage({ params }: PageProps) {
                   </a>
                 </CardContent>
               </Card>
+
+              {/* Related Pages: roof system + city (internal linking for SEO) */}
+              {(roofSystem || city) && (
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-semibold text-[#1F2937] mb-4">Explore Related</h3>
+                    <div className="space-y-3">
+                      {roofSystem && (
+                        <Link
+                          href={`/systems/${roofSystem.slug}`}
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+                        >
+                          <Layers className="h-5 w-5 text-[#7ED321] flex-shrink-0" />
+                          <div>
+                            <div className="font-medium text-[#1F2937]">{roofSystem.shortName}</div>
+                            <div className="text-sm text-gray-500">Learn about this roof system</div>
+                          </div>
+                        </Link>
+                      )}
+                      {city && (
+                        <Link
+                          href={`/service-area/${city.slug}`}
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+                        >
+                          <MapPin className="h-5 w-5 text-[#7ED321] flex-shrink-0" />
+                          <div>
+                            <div className="font-medium text-[#1F2937]">Roofing in {city.name}, VA</div>
+                            <div className="text-sm text-gray-500">See our {city.name} service area</div>
+                          </div>
+                        </Link>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               {/* Related Projects */}
               {relatedProjects.length > 0 && (

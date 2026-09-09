@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd, ServiceJsonLd, FAQJsonLd } from "@/components/seo/json-ld";
 import { COMPANY } from "@/lib/data/company";
 import { roofSystems, getRoofSystemBySlug, getAllRoofSystemSlugs } from "@/lib/roof-systems-data";
+import { getProjectsBySystem } from "@/lib/projects-data";
 import { services } from "@/lib/data/services";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,7 +15,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ArrowRight, CheckCircle, Phone, Building } from "lucide-react";
+import { ArrowRight, CheckCircle, Phone, Building, MapPin } from "lucide-react";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -54,6 +56,7 @@ export default async function RoofSystemPage({ params }: PageProps) {
   }
 
   const otherSystems = roofSystems.filter((s) => s.slug !== slug);
+  const systemProjects = getProjectsBySystem(slug).slice(0, 3);
 
   return (
     <>
@@ -153,6 +156,52 @@ export default async function RoofSystemPage({ params }: PageProps) {
                   ))}
                 </div>
               </div>
+
+              {/* Real Projects Using This System */}
+              {systemProjects.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-[#1F2937] mb-6">
+                    {system.shortName} Projects We&apos;ve Completed
+                  </h2>
+                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {systemProjects.map((project) => (
+                      <Link
+                        key={project.slug}
+                        href={`/projects/${project.slug}`}
+                        className="group block overflow-hidden rounded-xl border border-gray-200 hover:border-[#7ED321] transition-colors"
+                      >
+                        <div className="relative h-40 overflow-hidden">
+                          <Image
+                            src={project.image}
+                            alt={`${project.name} – ${project.roofType}`}
+                            fill
+                            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        <div className="p-4">
+                          <h3 className="font-semibold text-[#1F2937] group-hover:text-[#7ED321] transition-colors">
+                            {project.name}
+                          </h3>
+                          <p className="mt-1 flex items-center gap-1 text-sm text-gray-500">
+                            <MapPin className="h-4 w-4" />
+                            {project.location}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="mt-6">
+                    <Link
+                      href="/projects"
+                      className="inline-flex items-center text-[#7ED321] font-semibold hover:underline"
+                    >
+                      View all projects
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              )}
 
               {/* FAQ */}
               <div>

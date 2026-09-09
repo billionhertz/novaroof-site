@@ -219,10 +219,9 @@ export default async function CityPage({ params }: PageProps) {
 
               {/* Project Showcase */}
               {(() => {
-                // Get projects near this city - prioritize local, then show closest Virginia projects
-                const localProjects = projects.filter(p => 
-                  p.location.toLowerCase().includes(city.name.toLowerCase())
-                );
+                // Get projects near this city - prioritize an exact citySlug match,
+                // then fall back to other Virginia projects.
+                const localProjects = projects.filter(p => p.citySlug === city.slug);
                 const virginiaProjects = projects.filter(p => 
                   p.location.includes("VA") && !localProjects.includes(p)
                 );
@@ -245,8 +244,9 @@ export default async function CityPage({ params }: PageProps) {
                           <div className="relative h-48 overflow-hidden">
                             <Image
                               src={project.image}
-                              alt={project.name}
+                              alt={`${project.name} – ${project.roofType}`}
                               fill
+                              sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
                               className="object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                             <div className="absolute top-3 left-3">
