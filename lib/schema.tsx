@@ -155,6 +155,9 @@ export function generateProjectSchema(project: {
   description: string;
   url: string;
   location: string;
+  image?: string;
+  roofType?: string;
+  completedYear?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -162,6 +165,9 @@ export function generateProjectSchema(project: {
     name: project.name,
     description: project.description,
     url: project.url,
+    ...(project.image && { image: project.image }),
+    ...(project.roofType && { about: project.roofType }),
+    ...(project.completedYear && { dateCreated: project.completedYear }),
     locationCreated: {
       "@type": "Place",
       name: project.location,
@@ -169,6 +175,7 @@ export function generateProjectSchema(project: {
     creator: {
       "@type": "RoofingContractor",
       name: COMPANY.name,
+      url: COMPANY.url,
       telephone: COMPANY.phone,
     },
   };
