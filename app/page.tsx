@@ -133,9 +133,8 @@ export default function HomePage() {
 
               {/* Visual Headline */}
               <p className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-                <span className="text-[#E5E5E5]">Your Roof Is an Asset.</span>
-                <br />
-                <span className="text-[#7ED321]">Treat It Like One.</span>
+                <span className="text-[#E5E5E5]">Stop Paying for Roof Replacements</span>{" "}
+                <span className="text-[#7ED321]">You Don&apos;t Need.</span>
               </p>
 
               {/* Subheadline */}
