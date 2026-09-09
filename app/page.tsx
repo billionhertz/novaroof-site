@@ -5,15 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { COMPANY } from "@/lib/data/company";
 import { projects } from "@/lib/projects-data";
 import {
+  ChevronDown,
   Shield,
   Clock,
   DollarSign,
@@ -93,6 +88,8 @@ const serviceAreas = [
   { name: "Lynchburg", slug: "lynchburg" },
   { name: "Bridgewater", slug: "bridgewater" },
   { name: "Richmond", slug: "richmond" },
+  { name: "Roanoke", slug: "roanoke" },
+  { name: "Fredericksburg", slug: "fredericksburg" },
 ];
 
 export default function HomePage() {
@@ -362,6 +359,17 @@ export default function HomePage() {
                   className="object-cover"
                 />
               </div>
+            </div>
+
+            {/* Additional service link */}
+            <div className="text-center">
+              <Link
+                href="/services/roof-inspection"
+                className="inline-flex items-center gap-2 text-[#7ED321] font-semibold hover:gap-3 transition-all"
+              >
+                Plus Free Commercial Roof Inspections
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>
@@ -658,22 +666,20 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10">
-            <Accordion type="single" collapsible className="space-y-4">
+            <div className="space-y-4">
               {homeFaqs.map((faq, index) => (
-                <AccordionItem
+                <details
                   key={index}
-                  value={`item-${index}`}
-                  className="bg-white rounded-lg px-6 border-0 shadow-sm"
+                  className="group bg-white rounded-lg px-6 py-4 border-0 shadow-sm"
                 >
-                  <AccordionTrigger className="text-left text-[#1F2937] font-semibold hover:text-[#7ED321]">
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-left text-[#1F2937] font-semibold hover:text-[#7ED321] list-none [&::-webkit-details-marker]:hidden">
                     {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                    <ChevronDown className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="mt-3 text-gray-600">{faq.answer}</div>
+                </details>
               ))}
-            </Accordion>
+            </div>
           </div>
         </div>
       </section>

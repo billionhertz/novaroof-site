@@ -36,6 +36,7 @@ export async function generateMetadata({
     title: `${category.name} | NovaRoof Blog`,
     description: category.description,
     alternates: { canonical: `${COMPANY.url}/blog/category/${slug}` },
+    robots: { index: false, follow: true },
     openGraph: {
       title: `${category.name} | NovaRoof Blog`,
       description: category.description,

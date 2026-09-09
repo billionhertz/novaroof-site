@@ -68,7 +68,7 @@ function renderContent(content: string) {
       elements.push(
         <ul key={key++} className="list-disc list-inside space-y-2 my-4 text-gray-600">
           {currentList.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
           ))}
         </ul>
       );

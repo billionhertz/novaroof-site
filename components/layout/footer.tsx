@@ -13,8 +13,6 @@ const footerNavigation = {
     { name: "Roof Inspection", href: "/services/roof-inspection" },
   ],
   roofSystems: [
-    { name: "Membrane Restoration", href: "/systems/membrane-restoration" },
-    { name: "Metal Restoration", href: "/systems/metal-restoration" },
     { name: "Spray Foam", href: "/systems/spray-foam" },
     { name: "TPO Roofing", href: "/systems/tpo" },
     { name: "PVC Roofing", href: "/systems/pvc" },

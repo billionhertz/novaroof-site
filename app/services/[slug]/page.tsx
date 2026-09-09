@@ -7,12 +7,7 @@ import { services, type Service } from "@/lib/data/services";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
+  ChevronDown,
   ArrowRight,
   CheckCircle,
   Phone,
@@ -188,22 +183,20 @@ export default async function ServicePage({ params }: PageProps) {
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-8">
             Frequently Asked Questions
           </h2>
-          <Accordion type="single" collapsible className="space-y-4">
+          <div className="space-y-4">
             {service.faqs.map((faq, index) => (
-              <AccordionItem
+              <details
                 key={index}
-                value={`item-${index}`}
-                className="bg-[#F5F5F5] rounded-lg px-6 border-0"
+                className="group bg-[#F5F5F5] rounded-lg px-6 py-4 border-0"
               >
-                <AccordionTrigger className="text-left text-[#1F2937] font-semibold hover:text-[#7ED321]">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 text-left text-[#1F2937] font-semibold hover:text-[#7ED321] list-none [&::-webkit-details-marker]:hidden">
                   {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-600">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+                  <ChevronDown className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="mt-3 text-gray-600">{faq.answer}</div>
+              </details>
             ))}
-          </Accordion>
+          </div>
         </div>
       </section>
 

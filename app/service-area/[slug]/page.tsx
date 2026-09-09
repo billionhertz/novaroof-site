@@ -17,12 +17,7 @@ import { projects } from "@/lib/projects-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
+  ChevronDown,
   ArrowRight,
   CheckCircle,
   Phone,
@@ -638,22 +633,20 @@ export default async function CityPage({ params }: PageProps) {
             </h2>
           </div>
           <div className="mt-10">
-            <Accordion type="single" collapsible className="space-y-4">
+            <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <AccordionItem
+                <details
                   key={index}
-                  value={`item-${index}`}
-                  className="bg-white rounded-lg px-6 border-0 shadow-sm"
+                  className="group bg-white rounded-lg px-6 py-4 border-0 shadow-sm"
                 >
-                  <AccordionTrigger className="text-left text-[#1F2937] font-semibold hover:text-[#7ED321]">
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 text-left text-[#1F2937] font-semibold hover:text-[#7ED321] list-none [&::-webkit-details-marker]:hidden">
                     {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                    <ChevronDown className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="mt-3 text-gray-600">{faq.answer}</div>
+                </details>
               ))}
-            </Accordion>
+            </div>
           </div>
         </div>
       </section>
