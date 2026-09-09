@@ -171,8 +171,7 @@ export default function HomePage() {
             {/* Right Form */}
             <div className="bg-white rounded-2xl p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-[#1F2937]">Book a Consultation</h2>
-              <p className="mt-2 text-gray-600">No obligation — just honest answers.</p>
-              
+
               <form className="mt-6 space-y-4">
                 <Input placeholder="Full Name *" className="h-12" required />
                 <Input placeholder="Phone *" type="tel" className="h-12" required />
