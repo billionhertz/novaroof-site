@@ -7,7 +7,7 @@ import { generateProjectSchema, SchemaScript } from "@/lib/schema";
 import { COMPANY } from "@/lib/data/company";
 import { projects, getProjectBySlug, getAllProjectSlugs } from "@/lib/projects-data";
 import { getRoofSystemBySlug } from "@/lib/roof-systems-data";
-import { getCityBySlug } from "@/lib/cities-data";
+import { getCityBySlug, isServiceAreaCity } from "@/lib/cities-data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -69,7 +69,11 @@ export default async function ProjectPage({ params }: PageProps) {
     .slice(0, 3);
 
   const roofSystem = getRoofSystemBySlug(project.systemSlug);
-  const city = project.citySlug ? getCityBySlug(project.citySlug) : undefined;
+  // Only link to cities that have a live service-area page (others redirect).
+  const city =
+    project.citySlug && isServiceAreaCity(project.citySlug)
+      ? getCityBySlug(project.citySlug)
+      : undefined;
 
   const projectSchema = generateProjectSchema({
     name: project.name,
