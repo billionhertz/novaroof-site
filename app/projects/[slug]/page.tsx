@@ -80,6 +80,7 @@ export default async function ProjectPage({ params }: PageProps) {
     description: project.description,
     url: `${COMPANY.url}/projects/${slug}`,
     location: project.location,
+    streetAddress: project.streetAddress,
     image: project.image.startsWith("/") ? `${COMPANY.url}${project.image}` : project.image,
     roofType: project.roofType,
     completedYear: project.completedYear,
@@ -253,6 +254,9 @@ export default async function ProjectPage({ params }: PageProps) {
                     <MapPin className="h-5 w-5 text-[#7ED321] flex-shrink-0" />
                     <div>
                       <div className="text-sm text-gray-400">Location</div>
+                      {project.streetAddress && (
+                        <div className="font-medium">{project.streetAddress}</div>
+                      )}
                       <div className="font-medium">{project.location}</div>
                     </div>
                   </div>

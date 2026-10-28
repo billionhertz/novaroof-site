@@ -155,10 +155,12 @@ export function generateProjectSchema(project: {
   description: string;
   url: string;
   location: string;
+  streetAddress?: string;
   image?: string;
   roofType?: string;
   completedYear?: string;
 }) {
+  const [locality, region] = project.location.split(",").map((x) => x.trim());
   return {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -171,6 +173,13 @@ export function generateProjectSchema(project: {
     locationCreated: {
       "@type": "Place",
       name: project.location,
+      address: {
+        "@type": "PostalAddress",
+        ...(project.streetAddress && { streetAddress: project.streetAddress }),
+        addressLocality: locality,
+        ...(region && { addressRegion: region }),
+        addressCountry: "US",
+      },
     },
     creator: {
       "@type": "RoofingContractor",
