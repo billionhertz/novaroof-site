@@ -133,6 +133,8 @@ export const cities: City[] = [
   { rank: 114, name: "Buena Vista", population: 6593, milesFromHarrisonburg: 56, milesFromRichmond: 106, closerTo: "Harrisonburg", slug: "buena-vista" },
   { rank: 115, name: "Massanetta Springs", population: 6358, milesFromHarrisonburg: 4, milesFromRichmond: 96, closerTo: "Harrisonburg", slug: "massanetta-springs" },
   { rank: 116, name: "Broadway", population: 3800, milesFromHarrisonburg: 15, milesFromRichmond: 115, closerTo: "Harrisonburg", slug: "broadway" },
+  // Regional page (not a single city). Distance uses Hampton.
+  { rank: 117, name: "Hampton Roads", population: 0, milesFromHarrisonburg: 169, milesFromRichmond: 70, closerTo: "Richmond", slug: "hampton-roads" },
 ];
 
 // Curated list of cities with completed projects and unique hand-written
@@ -148,6 +150,7 @@ export const SERVICE_AREA_CITY_SLUGS: string[] = [
   "fredericksburg",
   "staunton",
   "front-royal",
+  "hampton-roads",
 ];
 
 export function getServiceAreaCitySlugs(): string[] {
