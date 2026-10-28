@@ -84,6 +84,7 @@ const serviceAreas = [
   { name: "Staunton", slug: "staunton" },
   { name: "Charlottesville", slug: "charlottesville" },
   { name: "Front Royal", slug: "front-royal" },
+  { name: "Hampton Roads", slug: "hampton-roads" },
   { name: "Lynchburg", slug: "lynchburg" },
   { name: "Richmond", slug: "richmond" },
   { name: "Roanoke", slug: "roanoke" },

@@ -28,12 +28,16 @@ export interface ServiceAreaPage {
   approachHeading: string;
   approach: string;
   faqs: ServiceAreaFaq[];
+  /** Optional replacement for the "About N miles from our office" sidebar line */
+  distanceNote?: string;
 }
 
 /** Former city pages that now permanently redirect into a broader area page. */
 export const MERGED_AREA_REDIRECTS: Record<string, string> = {
   bridgewater: "harrisonburg",
   waynesboro: "staunton",
+  hampton: "hampton-roads",
+  "virginia-beach": "hampton-roads",
 };
 
 export const serviceAreaPages: ServiceAreaPage[] = [
@@ -370,6 +374,51 @@ export const serviceAreaPages: ServiceAreaPage[] = [
           "Yes. We inspect commercial roofs in the Lynchburg area at no charge and provide repair, restoration and replacement options.",
       },
     ],
+  },
+  {
+    slug: "hampton-roads",
+    areaName: "Hampton Roads",
+    metaTitle: "Commercial Roofing in Hampton Roads, VA | Hampton, Virginia Beach & Williamsburg",
+    metaDescription:
+      "Commercial roof coatings, EPDM restoration and spray foam in Hampton, Virginia Beach and Williamsburg. See recent NovaRoof projects in Hampton Roads.",
+    headline: "Commercial Roofing in Hampton Roads",
+    heroSubtext:
+      "Roof restorations for hotels, churches and warehouses in Hampton, Virginia Beach and the Williamsburg area.",
+    intro: [
+      "Hampton Roads is a long way from our Harrisonburg office, but it has become a regular area for us. Recent jobs include the Hilton Garden Inn Hampton Coliseum Central, First Lynnhaven Baptist Church in Virginia Beach, and an 18,000 square foot warehouse in Toano, just outside Williamsburg.",
+      "All three were restorations rather than tear-offs: a water-based silicone coating over a hotel's shingle roofs, a seam-reinforced coating over a church's EPDM roof, and spray foam with a coating over a metal warehouse that had no insulation.",
+    ],
+    projectSlugs: ["hilton-garden-inn-hampton", "first-lynnhaven-baptist-church", "toano-warehouse-spray-foam"],
+    towns: ["Hampton", "Newport News", "Williamsburg", "Toano", "Norfolk", "Virginia Beach", "Chesapeake"],
+    buildingsHeading: "Roofs We See Around Hampton Roads",
+    buildings:
+      "Coastal weather is hard on roofs. Salt air speeds up corrosion on metal roofs and fasteners, and strong wind from tropical storms and nor'easters puts stress on shingles, membrane seams and roof edges. Around Hampton Roads we see a lot of hotels, churches, offices and warehouses whose roofs are still structurally sound but are leaking, faded or worn at the seams.",
+    approachHeading: "How We Approach Hampton Roads Roofs",
+    approach:
+      "When the roof underneath is still sound, a coating restoration usually costs far less than replacement and keeps the building open during the work. At the Hilton Garden Inn in Hampton, we coated the shingle roofs with WIMAR Performance Coatings, a water-based silicone designed to significantly increase wind and hail resistance. At First Lynnhaven Baptist Church, we cleaned the EPDM, reinforced every seam and coated the roof. In Toano, spray foam covered the damaged metal panels and added R-10 insulation.",
+    faqs: [
+      {
+        question: "Do you work in Hampton Roads if your office is in Harrisonburg?",
+        answer:
+          "Yes. Recent projects include the Hilton Garden Inn in Hampton, First Lynnhaven Baptist Church in Virginia Beach and a commercial warehouse in Toano. We travel to the area for commercial roof restorations, coatings and spray foam work.",
+      },
+      {
+        question: "Can an asphalt shingle roof be coated instead of replaced?",
+        answer:
+          "Yes, if the shingles are still attached and the deck is sound. At the Hilton Garden Inn in Hampton, we applied a water-based silicone made for shingle roofs. It refreshed the color and is designed to significantly increase the roof's wind and hail resistance, without a tear-off around an operating hotel.",
+      },
+      {
+        question: "Can a church's EPDM roof be restored?",
+        answer:
+          "Often, yes. At First Lynnhaven Baptist Church in Virginia Beach, we cleaned the black EPDM membrane, reinforced all of the seams with sealant, and coated the roof. That avoids the cost and disruption of tearing off a roof that is still attached and dry.",
+      },
+      {
+        question: "Does coastal salt air affect commercial metal roofs?",
+        answer:
+          "Yes. Salt in the air speeds up rust on exposed metal panels, fasteners and flashing. Keeping the metal sealed with a coating, or covered with spray foam and a coating, protects it from the moisture and salt that drive corrosion.",
+      },
+    ],
+    distanceNote: "We travel to Hampton Roads for commercial roofing projects",
   },
 ];
 

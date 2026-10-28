@@ -71,8 +71,9 @@ export default async function ServiceAreaPage({ params }: PageProps) {
 
   const otherAreas = getServiceAreaCities().filter((c) => c.slug !== slug);
   const heroImage = localProjects[0]?.image ?? FALLBACK_HERO;
-  const distance =
-    city.milesFromHarrisonburg === 0
+  const distance = page.distanceNote
+    ? page.distanceNote
+    : city.milesFromHarrisonburg === 0
       ? "Home of our office"
       : `About ${city.milesFromHarrisonburg} miles from our Harrisonburg office`;
 
