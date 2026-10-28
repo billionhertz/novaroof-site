@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }: PageProps) {
     description: project.description,
     url: `${COMPANY.url}/projects/${slug}`,
     location: project.location,
-    image: project.image,
+    image: project.image.startsWith("/") ? `${COMPANY.url}${project.image}` : project.image,
     roofType: project.roofType,
     completedYear: project.completedYear,
   });
@@ -148,6 +148,43 @@ export default async function ProjectPage({ params }: PageProps) {
                 <h2 className="text-2xl font-bold text-[#1F2937] mb-4">Project Overview</h2>
                 <p className="text-gray-600 leading-relaxed">{project.description}</p>
               </div>
+
+              {/* Job photos */}
+              {project.gallery && project.gallery.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-[#1F2937] mb-4">Job Photos</h2>
+                  {(["before", "during", "after"] as const).map((stage) => {
+                    const photos = project.gallery!.filter((p) => p.stage === stage);
+                    if (photos.length === 0) return null;
+                    const label = stage === "before" ? "Before" : stage === "during" ? "During the Work" : "Finished";
+                    return (
+                      <div key={stage} className="mb-8">
+                        <h3 className="text-lg font-semibold text-[#1F2937] mb-3">{label}</h3>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                          {photos.map((photo) => (
+                            <a
+                              key={photo.src}
+                              href={photo.src}
+                              target="_blank"
+                              rel="noopener"
+                              className="relative block aspect-[4/3] overflow-hidden rounded-lg bg-gray-100"
+                            >
+                              <Image
+                                src={photo.src}
+                                alt={photo.alt}
+                                fill
+                                sizes="(min-width: 768px) 22vw, 50vw"
+                                className="object-cover transition-transform hover:scale-105"
+                                loading="lazy"
+                              />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
               {/* Challenge */}
               {project.challenge && (
