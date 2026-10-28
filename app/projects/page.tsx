@@ -44,6 +44,7 @@ export default function ProjectsPage() {
                     src={project.image}
                     alt={`${project.name} – ${project.roofType}`}
                     fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover"
                   />
                   <div className="absolute top-3 left-3 px-2 py-1 bg-[#1F2937]/80 rounded text-[#7ED321] text-xs font-medium">

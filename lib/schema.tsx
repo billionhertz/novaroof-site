@@ -155,20 +155,36 @@ export function generateProjectSchema(project: {
   description: string;
   url: string;
   location: string;
+  streetAddress?: string;
+  image?: string;
+  roofType?: string;
+  completedYear?: string;
 }) {
+  const [locality, region] = project.location.split(",").map((x) => x.trim());
   return {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     name: project.name,
     description: project.description,
     url: project.url,
+    ...(project.image && { image: project.image }),
+    ...(project.roofType && { about: project.roofType }),
+    ...(project.completedYear && { dateCreated: project.completedYear }),
     locationCreated: {
       "@type": "Place",
       name: project.location,
+      address: {
+        "@type": "PostalAddress",
+        ...(project.streetAddress && { streetAddress: project.streetAddress }),
+        addressLocality: locality,
+        ...(region && { addressRegion: region }),
+        addressCountry: "US",
+      },
     },
     creator: {
       "@type": "RoofingContractor",
       name: COMPANY.name,
+      url: COMPANY.url,
       telephone: COMPANY.phone,
     },
   };

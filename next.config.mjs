@@ -8,6 +8,9 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // City pages merged into broader area pages
+      { source: "/service-area/bridgewater", destination: "/service-area/harrisonburg", permanent: true },
+      { source: "/service-area/waynesboro", destination: "/service-area/staunton", permanent: true },
       // Legacy roof-systems URLs from the previous site
       {
         source: "/roof-systems/jamesriver",

@@ -3,8 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
+import { generateProjectSchema, SchemaScript } from "@/lib/schema";
+import { FAQJsonLd } from "@/components/seo/json-ld";
 import { COMPANY } from "@/lib/data/company";
 import { projects, getProjectBySlug, getAllProjectSlugs } from "@/lib/projects-data";
+import { getRoofSystemBySlug } from "@/lib/roof-systems-data";
+import { getCityBySlug, isServiceAreaCity } from "@/lib/cities-data";
+import { getServiceAreaForProject } from "@/lib/service-area-pages";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +19,14 @@ import {
   MapPin,
   Calendar,
   Ruler,
+  Layers,
 } from "lucide-react";
+
+const STAGE_LABELS = { before: "Before", during: "During", after: "Finished" } as const;
+
+function paras(text: string): string[] {
+  return text.split(/\n\s*\n/).map((t) => t.trim()).filter(Boolean);
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -34,14 +46,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${project.name} | ${project.roofType}`,
-    description: `${project.description} Commercial roofing project in ${project.location} by NovaRoof.`,
+    description:
+      project.metaDescription ??
+      `${project.description} Commercial roofing project in ${project.location} by NovaRoof.`,
     alternates: { canonical: `${COMPANY.url}/projects/${slug}` },
     openGraph: {
       title: project.name,
       description: project.description,
       url: `${COMPANY.url}/projects/${slug}`,
-      type: "website",
-      images: [{ url: COMPANY.image }],
+      type: "article",
+      images: [{ url: project.image, alt: `${project.name} – ${project.roofType}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.name,
+      description: project.description,
+      images: [project.image],
     },
   };
 }
@@ -58,8 +78,30 @@ export default async function ProjectPage({ params }: PageProps) {
     .filter((p) => p.slug !== slug && p.category === project.category)
     .slice(0, 3);
 
+  const roofSystem = getRoofSystemBySlug(project.systemSlug);
+  // Only link to cities that have a live service-area page (others redirect).
+  const area = getServiceAreaForProject(project.slug);
+  const city = area
+    ? { slug: area.slug, name: area.areaName }
+    : project.citySlug && isServiceAreaCity(project.citySlug)
+      ? getCityBySlug(project.citySlug)
+      : undefined;
+
+  const projectSchema = generateProjectSchema({
+    name: project.name,
+    description: project.description,
+    url: `${COMPANY.url}/projects/${slug}`,
+    location: project.location,
+    streetAddress: project.streetAddress,
+    image: project.image.startsWith("/") ? `${COMPANY.url}${project.image}` : project.image,
+    roofType: project.roofType,
+    completedYear: project.completedYear,
+  });
+
   return (
     <>
+      <SchemaScript schema={projectSchema} />
+      {project.faqs && project.faqs.length > 0 && <FAQJsonLd faqs={project.faqs} />}
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "/" },
@@ -109,6 +151,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   src={project.image}
                   alt={`${project.name} – ${project.roofType}`}
                   fill
+                  sizes="(min-width: 1024px) 66vw, 100vw"
                   className="object-cover"
                   priority
                 />
@@ -117,14 +160,55 @@ export default async function ProjectPage({ params }: PageProps) {
               {/* Description */}
               <div>
                 <h2 className="text-2xl font-bold text-[#1F2937] mb-4">Project Overview</h2>
-                <p className="text-gray-600 leading-relaxed">{project.description}</p>
+                <div className="space-y-4">
+                  {paras(project.overview ?? project.description).map((para, i) => (
+                    <p key={i} className="text-gray-600 leading-relaxed">{para}</p>
+                  ))}
+                </div>
               </div>
+
+              {/* Job photos */}
+              {project.gallery && project.gallery.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-[#1F2937] mb-4">Job Photos</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                    {(["before", "during", "after"] as const).flatMap((stage) =>
+                      project.gallery!
+                        .filter((p) => p.stage === stage)
+                        .map((photo) => (
+                          <figure key={photo.src} className="overflow-hidden rounded-lg border border-gray-200 bg-white">
+                            <a href={photo.src} target="_blank" rel="noopener" className="relative block aspect-[4/3] bg-gray-100">
+                              <Image
+                                src={photo.src}
+                                alt={photo.caption ? `${photo.caption} (${project.name}, ${project.location})` : photo.alt}
+                                fill
+                                sizes="(min-width: 768px) 22vw, (min-width: 640px) 45vw, 100vw"
+                                className="object-cover"
+                                loading="lazy"
+                              />
+                              <span className="absolute left-2 top-2 rounded bg-[#1F2937]/85 px-2 py-0.5 text-xs font-semibold text-white">
+                                {STAGE_LABELS[stage]}
+                              </span>
+                            </a>
+                            {photo.caption && (
+                              <figcaption className="px-2 sm:px-3 py-2 text-xs sm:text-sm text-gray-600 leading-snug">{photo.caption}</figcaption>
+                            )}
+                          </figure>
+                        ))
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* Challenge */}
               {project.challenge && (
                 <div>
                   <h2 className="text-2xl font-bold text-[#1F2937] mb-4">The Challenge</h2>
-                  <p className="text-gray-600 leading-relaxed">{project.challenge}</p>
+                  <div className="space-y-4">
+                    {paras(project.challenge).map((para, i) => (
+                      <p key={i} className="text-gray-600 leading-relaxed">{para}</p>
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -132,7 +216,31 @@ export default async function ProjectPage({ params }: PageProps) {
               {project.solution && (
                 <div>
                   <h2 className="text-2xl font-bold text-[#1F2937] mb-4">Our Solution</h2>
-                  <p className="text-gray-600 leading-relaxed">{project.solution}</p>
+                  <div className="space-y-4">
+                    {paras(project.solution).map((para, i) => (
+                      <p key={i} className="text-gray-600 leading-relaxed">{para}</p>
+                    ))}
+                  </div>
+                  {project.steps && project.steps.length > 0 && (
+                    <ol className="mt-6 space-y-3">
+                      {project.steps.map((step, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#7ED321] text-sm font-bold text-[#1F2937]">
+                            {i + 1}
+                          </span>
+                          <span className="pt-0.5 text-gray-600">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </div>
+              )}
+
+              {/* Why this system */}
+              {project.whyThisSystem && (
+                <div className="p-6 rounded-xl bg-[#F5F5F5] border-l-4 border-[#7ED321]">
+                  <h2 className="text-xl font-bold text-[#1F2937] mb-3">Why This Approach</h2>
+                  <p className="text-gray-600 leading-relaxed">{project.whyThisSystem}</p>
                 </div>
               )}
 
@@ -148,6 +256,21 @@ export default async function ProjectPage({ params }: PageProps) {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* FAQ */}
+              {project.faqs && project.faqs.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-[#1F2937] mb-4">Common Questions</h2>
+                  <div className="space-y-5">
+                    {project.faqs.map((faq) => (
+                      <div key={faq.question}>
+                        <h3 className="font-semibold text-[#1F2937]">{faq.question}</h3>
+                        <p className="mt-1 text-gray-600 leading-relaxed">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -187,14 +310,15 @@ export default async function ProjectPage({ params }: PageProps) {
                     <MapPin className="h-5 w-5 text-[#7ED321] flex-shrink-0" />
                     <div>
                       <div className="text-sm text-gray-400">Location</div>
+                      {project.streetAddress && (
+                        <div className="font-medium">{project.streetAddress}</div>
+                      )}
                       <div className="font-medium">{project.location}</div>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <div className="h-5 w-5 flex items-center justify-center text-[#7ED321]">
-                      <span className="text-xs font-bold">TPE</span>
-                    </div>
+                    <Layers className="h-5 w-5 text-[#7ED321] flex-shrink-0" />
                     <div>
                       <div className="text-sm text-gray-400">Roof Type</div>
                       <div className="font-medium">{project.roofType}</div>
@@ -230,6 +354,41 @@ export default async function ProjectPage({ params }: PageProps) {
                   </a>
                 </CardContent>
               </Card>
+
+              {/* Related Pages: roof system + city (internal linking for SEO) */}
+              {(roofSystem || city) && (
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-semibold text-[#1F2937] mb-4">Explore Related</h3>
+                    <div className="space-y-3">
+                      {roofSystem && (
+                        <Link
+                          href={`/systems/${roofSystem.slug}`}
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+                        >
+                          <Layers className="h-5 w-5 text-[#7ED321] flex-shrink-0" />
+                          <div>
+                            <div className="font-medium text-[#1F2937]">{roofSystem.shortName}</div>
+                            <div className="text-sm text-gray-500">Learn about this roof system</div>
+                          </div>
+                        </Link>
+                      )}
+                      {city && (
+                        <Link
+                          href={`/service-area/${city.slug}`}
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#F5F5F5] transition-colors"
+                        >
+                          <MapPin className="h-5 w-5 text-[#7ED321] flex-shrink-0" />
+                          <div>
+                            <div className="font-medium text-[#1F2937]">Commercial Roofing in {city.name}</div>
+                            <div className="text-sm text-gray-500">More {city.name}-area projects</div>
+                          </div>
+                        </Link>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               {/* Related Projects */}
               {relatedProjects.length > 0 && (

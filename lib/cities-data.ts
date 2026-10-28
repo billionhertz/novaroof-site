@@ -147,9 +147,7 @@ export const SERVICE_AREA_CITY_SLUGS: string[] = [
   "charlottesville",
   "fredericksburg",
   "staunton",
-  "waynesboro",
   "front-royal",
-  "bridgewater",
 ];
 
 export function getServiceAreaCitySlugs(): string[] {

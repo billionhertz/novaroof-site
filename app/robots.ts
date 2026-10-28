@@ -6,7 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/_next/"],
+      // Do not block /_next/ — Google needs the CSS/JS there to render pages.
+      disallow: ["/api/"],
     },
     sitemap: `${COMPANY.url}/sitemap.xml`,
   };

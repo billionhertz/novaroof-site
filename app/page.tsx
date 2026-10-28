@@ -83,10 +83,8 @@ const serviceAreas = [
   { name: "Harrisonburg", slug: "harrisonburg" },
   { name: "Staunton", slug: "staunton" },
   { name: "Charlottesville", slug: "charlottesville" },
-  { name: "Waynesboro", slug: "waynesboro" },
   { name: "Front Royal", slug: "front-royal" },
   { name: "Lynchburg", slug: "lynchburg" },
-  { name: "Bridgewater", slug: "bridgewater" },
   { name: "Richmond", slug: "richmond" },
   { name: "Roanoke", slug: "roanoke" },
   { name: "Fredericksburg", slug: "fredericksburg" },
@@ -130,9 +128,8 @@ export default function HomePage() {
 
               {/* Visual Headline */}
               <p className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-                <span className="text-[#E5E5E5]">Your Roof Is an Asset.</span>
-                <br />
-                <span className="text-[#7ED321]">Treat It Like One.</span>
+                <span className="text-[#E5E5E5]">Stop Paying for Roof Replacements</span>{" "}
+                <span className="text-[#7ED321]">You Don&apos;t Need.</span>
               </p>
 
               {/* Subheadline */}
@@ -169,8 +166,7 @@ export default function HomePage() {
             {/* Right Form */}
             <div className="bg-white rounded-2xl p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-[#1F2937]">Book a Consultation</h2>
-              <p className="mt-2 text-gray-600">No obligation — just honest answers.</p>
-              
+
               <form className="mt-6 space-y-4">
                 <Input placeholder="Full Name *" className="h-12" required />
                 <Input placeholder="Phone *" type="tel" className="h-12" required />
