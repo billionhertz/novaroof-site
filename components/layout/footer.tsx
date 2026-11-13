@@ -32,6 +32,10 @@ const footerNavigation = {
     { name: "Staunton", href: "/service-area/staunton" },
     { name: "Richmond", href: "/service-area/richmond" },
     { name: "Roanoke", href: "/service-area/roanoke" },
+    { name: "Lynchburg", href: "/service-area/lynchburg" },
+    { name: "Fredericksburg", href: "/service-area/fredericksburg" },
+    { name: "Northern Shenandoah Valley", href: "/service-area/front-royal" },
+    { name: "Hampton Roads", href: "/service-area/hampton-roads" },
     { name: "All Service Areas", href: "/service-area" },
   ],
 };
