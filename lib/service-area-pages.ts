@@ -38,6 +38,57 @@ export const MERGED_AREA_REDIRECTS: Record<string, string> = {
   waynesboro: "staunton",
   hampton: "hampton-roads",
   "virginia-beach": "hampton-roads",
+  // Nearby towns → hampton-roads
+  chesapeake: "hampton-roads",
+  norfolk: "hampton-roads",
+  "newport-news": "hampton-roads",
+  suffolk: "hampton-roads",
+  portsmouth: "hampton-roads",
+  williamsburg: "hampton-roads",
+  poquoson: "hampton-roads",
+  "gloucester-point": "hampton-roads",
+  // Nearby towns → richmond
+  tuckahoe: "richmond",
+  mechanicsville: "richmond",
+  petersburg: "richmond",
+  "short-pump": "richmond",
+  "glen-allen": "richmond",
+  hopewell: "richmond",
+  chester: "richmond",
+  meadowbrook: "richmond",
+  midlothian: "richmond",
+  laurel: "richmond",
+  "colonial-heights": "richmond",
+  "bon-air": "richmond",
+  "east-highland-park": "richmond",
+  "highland-springs": "richmond",
+  brandermill: "richmond",
+  chesterfield: "richmond",
+  manchester: "richmond",
+  wyndham: "richmond",
+  innsbrook: "richmond",
+  lakeside: "richmond",
+  bellwood: "richmond",
+  ashland: "richmond",
+  // Nearby towns → roanoke
+  "cave-spring": "roanoke",
+  salem: "roanoke",
+  vinton: "roanoke",
+  // Nearby towns → lynchburg
+  timberlake: "lynchburg",
+  "madison-heights": "lynchburg",
+  bedford: "lynchburg",
+  // Nearby towns → harrisonburg
+  "massanetta-springs": "harrisonburg",
+  broadway: "harrisonburg",
+  // Nearby towns → staunton
+  "stuarts-draft": "staunton",
+  // Nearby towns → charlottesville
+  crozet: "charlottesville",
+  "lake-monticello": "charlottesville",
+  "stony-point": "charlottesville",
+  // Nearby towns → front-royal
+  winchester: "front-royal",
 };
 
 export const serviceAreaPages: ServiceAreaPage[] = [
