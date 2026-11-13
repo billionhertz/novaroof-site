@@ -222,8 +222,8 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/commercial-roof-membrane-seam-repair-novaroof-qTTPJ6YuTXEXFfDzo4urwJtgldxv1D.jpg"
-                  alt="Commercial roof membrane seam repair by NovaRoof"
+                  src="/images/home/roof-repair.webp"
+                  alt="NovaRoof crew repairing a rooftop curb on a commercial flat roof"
                   fill
                   className="object-cover"
                 />
@@ -254,8 +254,8 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg lg:order-1">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/novaroof-commercial-roof-inspection-maintenance-oqBJ4N5nBNFsJseHYJq5fx5DCuWBft.jpg"
-                  alt="NovaRoof technician performing commercial roof inspection"
+                  src="/images/home/preventative-maintenance.webp"
+                  alt="NovaRoof crew member pressure washing a commercial metal roof"
                   fill
                   className="object-cover"
                 />
@@ -286,8 +286,8 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/commercial-roof-restoration-before-after-novaroof-7bAcfUhbhy4NaMyeZNHo1IKDRBLa6O.jpg"
-                  alt="Before and after commercial roof restoration by NovaRoof"
+                  src="/images/home/membrane-restoration-before-after.webp"
+                  alt="Commercial membrane roof before and after a NovaRoof coating restoration"
                   fill
                   className="object-cover"
                 />
@@ -350,8 +350,8 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/commercial-roof-replacement-project-novaroof-i4BeUpcZlA2xEaYql3DCaK9A2ap25p.jpg"
-                  alt="Commercial roof replacement project by NovaRoof"
+                  src="/images/home/roof-replacement.webp"
+                  alt="Aerial view of a commercial building with a new NovaRoof roof"
                   fill
                   className="object-cover"
                 />
